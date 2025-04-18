@@ -12,16 +12,16 @@
     </header>
     <div class="button-container">
         <div class="styled-button" data-target="carouselItems">
-            <h3>本草图鉴</h3>
-        </div>
-        <div class="styled-button" data-target="ch-1">
-            <h3>多功能本草</h3>
+            <h3>中药资源分布图</h3>
         </div>
         <div class="styled-button" data-target="ch-2">
-            <h3>经络护卫</h3>
+            <h3>中药词云与层级</h3>
         </div>
         <div class="styled-button" data-target="ch-3">
-            <h3>古装本草</h3>
+            <h3>中药知识导图</h3>
+        </div>
+        <div class="styled-button" data-target="ch-4">
+            <h3>道地药材统计分布图</h3>
         </div>
     </div>
     
@@ -30,7 +30,7 @@
         <!-- <input type="text" id="searchInput" placeholder="搜索中药..."> -->
         <div class="">
             <div class="top-box ">
-                <div class="">一、新增顶部信息展示区</div>
+                <div class="">一、中药资源分布图</div>
             </div>
             <div class="data-box side-by-side">
                 <div class="carousel-container">
@@ -39,30 +39,52 @@
                 <div class="wordcloud-container xuanfu" id="ch-1"></div>
             </div>
             <div class="top-box ">
-                <div class="">二、新增顶部信息展示区</div>
+                <div class="">二、中药词云与层级</div>
             </div>
             <div  class="high-box data-box side-by-side" >
                 <div class="ziti-box">
                     <div class="wordcloud" id="ch-5"></div>
-                    <div class="wordcloud"> 11</div>
+                    <div class="wordcloud"><p>&nbsp;&nbsp;&nbsp;&nbsp;词云图通过字体大小体现不同中药类别的重要性，“清热药”“补虚药”等字大者更为常见。图中涵盖解表、祛风湿、利水渗湿、温里、理气、消食、驱虫、止血、活血、化痰止咳平喘、安神、平肝熄风、开窍等类别，依据中药功效及主治病症划分，展示中药在各治疗领域的作用。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;右侧层级关系图以中药为核心，分多层展示分类。第二层为补虚、清热解毒等大类；第三层细分如清热凉血、祛风寒湿等；外层细分到利湿消肿、止咳平喘等药效，且标注药物数量。其分类基于中药学理论，按功效、主治病症等划分，助于理解中药分类体系。
+                    </p></div>
                 </div>
                 <div class="sunburst-container xuanfu" id="ch-2"></div>
             </div>
             <div class="top-box ">
-                <div class="">三、新增顶部信息展示区</div>
+                <div class="">三、中药知识导图</div>
             </div>
             <div class="high-box data-box side-by-side">
                 <div class="tree-box xuanfu">
                     <div id="ch-3"></div> <!-- 确保图表容器在tree-box内部 -->
                 </div>
                 <div class="ziti-box">
-                    
+                    <p><b>中药采集：</b>与中药的采摘、处理等有关，包括“采收期”“中药炮制”等术语。</p>
+                    <p><b>中药性能：</b>涉及中药的“四气五味”和“药性”，包括寒、热、温、凉、平和酸、苦、甘、辛、咸等。</p>
+                    <p><b>中药配伍：</b>基于“七情”的配伍原则，包括“单行”“相须”“相使”“相畏”“相杀”“相反”“相恶”等。</p>
+                    <p><b>中药用法：</b>关乎中药的服用方法和时间，如“空腹服”“饭前服”“饭后服”“顿服”“分服”等。</p>
+                    <p><b>中药鉴定：</b>通过“性状鉴定法”“显微鉴定法”“理化鉴定法”“生物鉴定法”等方法确保中药的质量和真实性。</p>
+                    <p><b>中药药性理论：</b>现行的中药药性理论可分为四个层次，包括属性层次（如味道、气味等）、理论层次（如四气、升降浮沉、归经等）、功效层次（如毒性、功效等）和主治层次。这些层次相互关联，各有侧重</p>
+                    <p><b>总结：</b>在用法上，《伤寒论》载有先煎、后下等煎药法；还有冲服、含化等特殊服法。禁忌方面，有 “十八反”“十九畏” 等配伍禁忌，妊娠期禁用桃仁等活血之品。鉴定上，《新修本草》用图文法，凭经验观察性状等。这些体现了古代中药学的丰富内涵和实用性。</p>
                 </div>
                 
             </div>
         </div>
+        <div class="top-box ">
+            <div class="">四、道地药材统计分布图</div>
+        </div>
         <div class="data-box side-by-side high-box">
             <div class="pie" id="ch-4"></div>
+        </div>
+        <div class="a-container">
+            <div class="a-box">
+                <div><a href="index.html" class="button-box">返回首页</a></div>
+            </div>
+            <div class="a-box">
+                <div><a href="aaa.html" class="button-box">返回中药展示</a></div>
+            </div>
+            <div class="a-box">
+                <div><a href="医书.html" class="button-box">返回药书展示</a></div>
+            </div>
         </div>
     </div>
 
