@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>人物介绍</title>
+    <style>
+        .outer-container {
+            background-color: #FFF8DC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .person-container {
+            width: calc(20% - 10px);
+            margin: 5px;
+            text-align: center;
+        }
+
+        .person-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin: 0 auto 2px;
+        }
+
+        .person-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .person-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #FFF8DC;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 修改姓名文本框背景颜色 */
+        .bg-white {
+            background-color: #FFF8DC !important;
+            width: 60%;
+            margin: 0 auto;
+            padding: 1px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .bg-white p {
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="outer-container">
+        <div class="container mx-auto flex flex-wrap">
+            <!-- 循环创建 30 个人物介绍 -->
+            <!-- 此处可根据实际需求修改图片链接和人物信息 -->
+            <!-- 这里使用示例图片 -->
+            <!-- 真实使用时，请替换为真实的人物图片和信息 -->
+            <!-- 为了简洁，这里仅展示一个示例，实际使用时需要复制 30 份 -->
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal1')">
+                    <img src="img4/扁鹊.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>扁鹊</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal1')">&times;</span>
+                    <h2>扁鹊</h2>
+                    <p>时代：春秋战国时期</p>
+                    <p>著作：《难经》(传世)、《内经》</p>
+                    <p>影响：扁鹊奠定了中医学的切脉诊断方法，开启了中医学之先河。</p>
+                </div>
+            </div>
+            <!-- 此处重复添加 29 次上述人物介绍和模态框代码 -->
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal2')">
+                    <img src="img4/张仲景.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>张仲景</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal2')">&times;</span>
+                    <h2>张仲景</h2>
+                    <p>时代：东汉末年</p>
+                    <p>著作：《伤寒杂病论》（后世分为《伤寒论》和《金匮要略》），此外还有《辨伤寒》十卷、《评病药方》一卷、《疗妇人方》二卷、《五藏论》一卷、《口齿论》一卷等，但后者均已散失</p>
+                    <p>影响：奠定了中医临床学基础，被尊为“医圣”。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal3')">
+                    <img src="img4/华佗.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>华佗</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal3" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal3')">&times;</span>
+                    <h2>华佗</h2>
+                    <p>时代：东汉末年</p>
+                    <p>著作：《青囊经》，“麻沸散”,“五禽戏”</p>
+                    <p>影响：被尊为“外科鼻祖”，其麻醉技术和外科手术方法对后世医学产生了深远影响;“五禽戏”对后世中医养生学和现代运动医学的发展起到了积极的推动作用</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal5')">
+                    <img src="img4/皇甫谧.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>皇甫谧</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal5" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal5')">&times;</span>
+                    <h2>皇甫谧</h2>
+                    <p>时代：三国至西晋时期（215年—282年）</p>
+                    <p>著作：《针灸甲乙经》</p>
+                    <p>影响：被誉为“针灸鼻祖”，其医学和史学著作对后世产生了深远影响。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal4')">
+                    <img src="img4/葛洪.jpeg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>葛洪</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal4" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal4')">&times;</span>
+                    <h2>葛洪</h2>
+                    <p>时代：东晋</p>
+                    <p>著作：《肘后备急方》</p>
+                    <p>影响：其著作《肘后备急方》记载大量急救方剂，为后世医学提供了宝贵的实践经验，甚至启发了现代医学研究。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal9')">
+                    <img src="img4/陶弘景.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>陶弘景</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal9" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal9')">&times;</span>
+                    <h2>陶弘景</h2>
+                    <p>时代：南朝（历经宋、齐、梁三朝，456年—536年）</p>
+                    <p>著作：《本草经集注》，《养性延命录》，《集金丹黄白方》等。</p>
+                    <p>影响：陶弘景在医领域有深远影响，其著作和思想对后世的医学提供了重要参考。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal6')">
+                    <img src="img4/巢元方.png" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>巢元方</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal6" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal6')">&times;</span>
+                    <h2>巢元方</h2>
+                    <p>时代：隋代（约公元6世纪末至7世纪初）</p>
+                    <p>著作：《诸病源候论》</p>
+                    <p>影响：提出“乖戾之气”是传染病的致病因素，记载了多种寄生虫病及其感染途径，对疾病的诊断、预后、预防及治疗方法有详细论述。
+                        《诸病源候论》奠定了中医病因学和证候学的基础，对后世医学发展产生了深远影响。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal7')">
+                    <img src="img4/孙思邈.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>孙思邈</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal7" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal7')">&times;</span>
+                    <h2>孙思邈</h2>
+                    <p>时代：唐代</p>
+                    <p>著作：《千金要方》《千金翼方》</p>
+                    <p>影响：孙思邈被后世尊称为“药王”，提出“胆欲大而心欲小，智欲圆而行欲方”的医德理念，“防重于治”的医疗思想，其医学思想和著作对中医的发展产生了深远影响，至今仍被广泛研究和应用</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal8')">
+                    <img src="img4/王焘.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>王焘</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal8" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal8')">&times;</span>
+                    <h2>王焘</h2>
+                    <p>时代：唐代（670年—755年）</p>
+                    <p>著作：《外台秘要》</p>
+                    <p>影响：收集大量古代医学文献和民间验方，外台秘要》被誉为“世宝”，历代医家认为“不观《外台》方，不读《千金》论，则医所见不广，用药不神”，对后世医学发展产生了深远影响。</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal10')">
+                    <img src="img4/钱乙.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>钱乙</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal10" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal10')">&times;</span>
+                    <h2>钱乙</h2>
+                    <p>时代：北宋（约1032年—1113年）</p>
+                    <p>著作：《小儿药证直诀》</p>
+                    <p>影响：被尊称为“儿科之圣”“幼科之鼻祖”，其著作和理论对后世儿科医学的发展产生了深远影响。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal24')">
+                    <img src="img4/庞安时.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>庞安时</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal24" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal24')">&times;</span>
+                    <h2>庞安时</h2>
+                    <p>时代：北宋（1042年—1099年）</p>
+                    <p>著作：《伤寒总病论》</p>
+                    <p>影响：发明了“金针”等外科手术工具，被誉为“医王”，其学术思想和医术对后世温病学说的创立和发展产生了深远影响</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal14')">
+                    <img src="img4/张从正.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>张从正</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal14" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal14')">&times;</span>
+                    <h2>张从正</h2>
+                    <p>时代：金代（1156年—1228年）</p>
+                    <p>著作：《儒门事亲》，《张氏经验方》，《伤寒心镜》等</p>
+                    <p>影响：张从正被誉为“金元四大家”之一，其“攻下派”理论对后世中医的治疗学和温病学发展产生了深远影响。</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal12')">
+                    <img src="img4/刘完素.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>刘完素</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal12" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal12')">&times;</span>
+                    <h2>刘完素</h2>
+                    <p>时代：金代（约1110年—1200年）</p>
+                    <p>著作：《素问玄机原病式》，《黄帝素问宣明论方》，《伤寒直格》，《三消论》</p>
+                    <p>影响：刘完素的理论为后世温病学说的形成奠定了基础，其“火热论”和寒凉治疗法对明清温病学派的发展产生了深远影响。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal13')">
+                    <img src="img4/李杲.gif" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>李杲</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal13" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal13')">&times;</span>
+                    <h2>李杲</h2>
+                    <p>时代：金元时期（1180年—1251年）</p>
+                    <p>著作：《脾胃论》，《内外伤辨惑论》，《兰室秘藏》，《用药法象》</p>
+                    <p>影响：李杲被誉为“补土派”创始人，其脾胃学说对后世中医理论和临床实践产生了深远影响，成为中医“金元四大家”之一。</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal15')">
+                    <img src="img4/朱震亨.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>朱震亨</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal15" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal15')">&times;</span>
+                    <h2>朱震亨</h2>
+                    <p>时代：元代（1281年—1358年）</p>
+                    <p>著作：《丹溪心法》，《格致余论》，《局方发挥》，《本草衍义补遗》</p>
+                    <p>影响：朱震亨的理论和实践对后世医学发展影响深远，其“滋阴派”学说被后世广泛接受和发展，明代多位医家继承其学说。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal11')">
+                    <img src="img4/李时珍.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>李时珍</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal11" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal11')">&times;</span>
+                    <h2>李时珍</h2>
+                    <p>时代：明代（1518年—1593年）</p>
+                    <p>著作：《本草纲目》，《濒湖脉学》，《奇经八脉考》</p>
+                    <p>影响：李时珍的《本草纲目》被誉为“东方医药巨典”，对后世医学发展产生了深远影响，被翻译成多种语言在世界范围内传播。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal16')">
+                    <img src="img4/叶桂（叶天士）.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>叶桂（叶天士）</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal16" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal16')">&times;</span>
+                    <h2>叶桂（叶天士）</h2>
+                    <p>时代：清代（1666年—1745年）</p>
+                    <p>著作：《温热论》，《临证指南医案》，《叶案存真》</p>
+                    <p>影响：叶桂是温病学派的奠基人之一，其理论和实践对后世温病学的发展产生了深远影响，被后世医家奉为经典。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal21')">
+                    <img src="img4/程国彭.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>程国彭</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal21" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal21')">&times;</span>
+                    <h2>程国彭</h2>
+                    <p>时代：清代（约1680年—1733年）</p>
+                    <p>著作：《医学心悟》，《外科十法》</p>
+                    <p>影响：程国彭的《医学心悟》成为初学中医者的经典教材，其理论和方法在中医临床中广泛应用，对中医理论体系的完善和传播作出了重要贡献。</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal17')">
+                    <img src="img4/薛生白.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>薛生白</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal17" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal17')">&times;</span>
+                    <h2>薛生白</h2>
+                    <p>时代：清代（1681年—1770年）</p>
+                    <p>著作：《湿热条辨》，《医经原旨》</p>
+                    <p>影响：精通湿热病的辨证论治，提出湿热病的病理特点和治疗原则，对后世温病学的发展产生了深远影响，其著作成为后世医家学习的重要参考。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal20')">
+                    <img src="img4/徐大椿.jpeg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>徐大椿</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal20" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal20')">&times;</span>
+                    <h2>徐大椿</h2>
+                    <p>时代：清代（1693年—1771年）</p>
+                    <p>著作：《医学源流论》，《伤寒类方》，《神农本草经百种录》等</p>
+                    <p>影响：徐大椿的医学著作和理论对后世影响深远，其治学严谨，敢于直言，一扫成见，另树一帜，是中医史上千百年独见之医学评论大家。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal25')">
+                    <img src="img4/赵学敏.webp" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>赵学敏</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal25" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal25')">&times;</span>
+                    <h2>赵学敏</h2>
+                    <p>时代：清代（约1719年—1805年）</p>
+                    <p>著作：《本草纲目拾遗》，《串雅》</p>
+                    <p>影响：赵学敏的著作和研究极大地丰富了中医药学的内容，尤其是《本草纲目拾遗》在中医药史上占有重要地位，一直受到海内外学者的重视。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal22')">
+                    <img src="img4/陈修园.png" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>陈修园</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal22" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal22')">&times;</span>
+                    <h2>陈修园</h2>
+                    <p>时代：清代（1753年—1823年）</p>
+                    <p>著作：《伤寒论浅注》，《金匮要略浅注》，《医学三字经》等</p>
+                    <p>影响：陈修园的医学著作和教育活动对后世中医的发展产生了深远影响。他的书籍通俗易懂，为初学者提供了入门阶梯，其医学理念和实践方法至今仍被广泛应用。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal18')">
+                    <img src="img4/吴鞠通.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>吴鞠通</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal18" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal18')">&times;</span>
+                    <h2>吴鞠通</h2>
+                    <p>时代：清代（1758年—1836年）</p>
+                    <p>著作：《温病条辨》，《吴鞠通医案》，《医医病书》</p>
+                    <p>影响：发展了叶天士的温病学说，提出温病与伤寒的区别，创制了多个著名方剂，对后世中医温病学的发展产生了深远影响，被誉为“温病学派的巨匠”。</p>
+                </div>
+            </div>
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal19')">
+                    <img src="img4/王士雄.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>王士雄</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal19" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal19')">&times;</span>
+                    <h2>王士雄</h2>
+                    <p>时代：清代（1808年—1868年）</p>
+                    <p>著作：《随息居重订霍乱论》，《温热经纬》，《随息居饮食谱》，《王氏医案》等</p>
+                    <p>影响：王士雄是晚清时期著名的温病学家，其著作和理论对后世温病学的发展产生了深远影响，被后世尊称为“温病大家”。</p>
+                </div>
+            </div>
+
+
+            <div class="person-container">
+                <div class="person-circle" onclick="openModal('modal23')">
+                    <img src="img4/唐宗海.jpg" alt="人物图片">
+                </div>
+                <div class="bg-white">
+                    <p>唐宗海</p>
+                </div>
+            </div>
+            <!-- 模态框 -->
+            <div id="modal23" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('modal23')">&times;</span>
+                    <h2>唐宗海</h2>
+                    <p>时代：清代（1846年—1897年）</p>
+                    <p>著作：《中西医汇通医书五种》，《血证论》，《本草问答》</p>
+                    <p>影响：唐宗海的学术思想和著作对中西医汇通的发展起到了重要的推动作用，其血证治疗原则至今仍被广泛应用。</p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // 点击模态框外部关闭模态框
+        window.onclick = function (event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>    

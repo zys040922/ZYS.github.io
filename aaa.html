@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中药可视化</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>中药可视化</h1>
+    </header>
+    <div class="button-container">
+        <div class="styled-button" data-target="carouselItems">
+            <h3>本草图鉴</h3>
+        </div>
+        <div class="styled-button" data-target="ch-1">
+            <h3>多功能本草</h3>
+        </div>
+        <div class="styled-button" data-target="ch-2">
+            <h3>经络护卫</h3>
+        </div>
+        <div class="styled-button" data-target="ch-3">
+            <h3>古装本草</h3>
+        </div>
+    </div>
+    
+    <div class="app-container additional-data-container">
+        <div class="box"></div>
+        <!-- <input type="text" id="searchInput" placeholder="搜索中药..."> -->
+        <div class="">
+            <div class="top-box ">
+                <div class="">一、新增顶部信息展示区</div>
+            </div>
+            <div class="data-box side-by-side">
+                <div class="carousel-container">
+                    <div class="carousel-items " id="carouselItems"></div>
+                </div>
+                <div class="wordcloud-container xuanfu" id="ch-1"></div>
+            </div>
+            <div class="top-box ">
+                <div class="">二、新增顶部信息展示区</div>
+            </div>
+            <div  class="high-box data-box side-by-side" >
+                <div class="ziti-box">
+                    <div class="wordcloud" id="ch-5"></div>
+                    <div class="wordcloud"> 11</div>
+                </div>
+                <div class="sunburst-container xuanfu" id="ch-2"></div>
+            </div>
+            <div class="top-box ">
+                <div class="">三、新增顶部信息展示区</div>
+            </div>
+            <div class="high-box data-box side-by-side">
+                <div class="tree-box xuanfu">
+                    <div id="ch-3"></div> <!-- 确保图表容器在tree-box内部 -->
+                </div>
+                <div class="ziti-box">
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div class="data-box side-by-side high-box">
+            <div class="pie" id="ch-4"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="static/index.js"></script>
+    
+</body>
+</html>

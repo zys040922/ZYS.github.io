@@ -1,0 +1,329 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('images1/img2/背景.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-y: auto;
+}
+
+
+.button-container {
+    display: grid;
+    max-width: 1100px;
+    margin-left:120px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 20px;
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+.styled-button {
+    /* 转换为盒子样式 */
+    height: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直居中 */
+    align-items: center;     /* 水平居中 */
+    text-align: center;      /* 文本内容居中 */
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(224,240,224,0.8);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background-image: url('images1/img2/方框2.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.styled-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #8bc63e 0%, #9ccc65 100%);
+    transition: height 0.3s;
+}
+
+.styled-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.styled-button:hover::before {
+    height: 100%;
+    opacity: 0.1;
+}
+
+/* 新增文字样式 */
+.styled-button h3 {
+    color: #4a694a;
+    margin: 0 0 10px;
+    font-size: 1.2em;
+    position: relative;
+    z-index: 1;
+}
+
+.styled-button p {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* 高亮动画效果 */
+@keyframes highlight {
+    0% { box-shadow: 0 0 0 0 rgba(255,215,0,0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255,215,0,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,215,0,0); }
+}
+
+.highlight {
+    animation: highlight 2s;
+}
+
+.app-container {
+    max-width: 1100px;
+    margin: 100px auto;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    transition: transform 0.3s ease-in-out;
+    background-color: #f3e9c4;
+    margin-bottom: 530px;
+}
+
+.app-container:hover {
+    transform: translateY(-10px);
+}
+
+header {
+    text-align: center;
+    margin-top: 50px;
+    height: 150px;
+    font-size: 30px;
+}
+
+h1 {
+    color: #555;
+}
+
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: transparent;
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.carousel-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: scroll 800s linear infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(calc(-100% + 200px)); }
+}
+
+.herb-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 204, 0.4);
+    box-sizing: border-box;
+    transition: transform 30s ease-in-out;
+}
+
+.herb-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.herb-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.herb-item h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.herb-item p {
+    margin: 5px 0 0;
+    font-size: 12px;
+}
+
+.additional-data-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.data-box {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 25px;
+    padding: 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 100%;
+    height: 450px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.pie{
+    margin-top: 25px;
+    padding: 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 100%;
+    height: 600px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.xuanfu:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ziti-box {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.wordcloud-container {
+    width: 100%;
+    height: 100%;
+    background-color: #f2cc83;
+}
+
+.wordcloud{
+    width: 100%;
+    height: 50%;
+    border: #333;
+}
+
+.sunburst-container {
+    width: 150%;
+    height: 100%;
+    background-image: url('images1/img2/背景3.jpg');
+    background-color: #f2cc83;
+}
+
+.tree-box{
+    background-image: url("images1/img2/背景4.jpg");
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-position: center;
+    width: 150%;  /* 改为100%填充父容器 */
+    height: 100%;
+    position: relative; /* 添加相对定位 */
+    overflow: visible; /* 隐藏溢出内容 */
+}
+
+#ch-3 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px; /* 调整并列盒子之间的间距 */
+}
+
+.high-box {
+    height: 650px;
+}
+
+.node circle {
+    fill: #ff6b6b;
+    stroke: #fff;
+    stroke-width: 2px;
+}
+.node text {
+    font-size: 10px;
+    pointer-events: none;
+}
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1px; /* 调整线条粗细以节省空间 */
+}
+
+.top-box {
+    width: 300px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(243, 233, 196, 0.9) 0%, rgba(255, 240, 204, 0.9) 100%);
+    border: 2px solid #e6d8a6;
+    border-radius: 16px;
+    margin-top: 25px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images1/img2/边框.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+    border-radius: 25px;
+
+}
+
+.top-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(230, 216, 166, 0.2);
+}
+
