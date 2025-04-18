@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <!-- 引入 ECharts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    <!-- 引入自定义的 sun.js 文件 -->
+    <script src="sun.js"></script>
+    <!-- 引入 D3.js 库 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>本草经年</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('img4/背景.jfif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+       .new-box {
+            border-radius: 2rem;
+            max-width: 90%;
+            background-color: #FFF8DC;
+            box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            transform-origin: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            /* 增大高度 */
+            min-height: 800px; 
+        }
+
+       .jump-box {
+            position: relative;
+            background-color: #FFF8DC;
+            box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+            width: calc(90% * 2 / 3);
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-bottom: calc((0.75rem * 2) * 1.5);
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            border-radius: 9999px;
+            /* 添加动态边框动画 */
+            border: 2px solid transparent;
+            animation: borderAnimation 3s infinite linear;
+        }
+
+       .jump-box:first-child {
+            margin-top: 3rem;
+        }
+
+       .jump-box:hover {
+            background-color: #f0f0f0;
+        }
+
+       .triangle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 0.5rem solid transparent;
+            border-bottom: 0.5rem solid transparent;
+            border-right: 0.5rem solid #333;
+            animation: float 1.5s infinite ease-in-out alternate;
+        }
+
+       .book-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+       .nav-title-box {
+            background-color: #FFFDF3 !important;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+       .jump-box-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(-50%) translateY(-0.3125rem);
+            }
+            to {
+                transform: translateY(-50%) translateY(0.3125rem);
+            }
+        }
+
+       .title-container {
+            position: relative;
+            display: inline-block;
+            padding: 1.875rem;
+            border: 1.25rem solid transparent;
+            border-image: url('border-image.png') 30 round;
+        }
+
+       .title {
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+       .content-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .content-container > div {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .text-box {
+            position: relative;
+            background-color: #FFF8DC;
+            box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1rem;
+            width: calc(90% * 2 / 3);
+            text-align: center;
+            transition: background-color 0.3s ease;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 9999px;
+            /* 添加动态边框动画 */
+            /* border: 2px solid transparent;
+            animation: borderAnimation 3s infinite linear; */
+        }
+
+       .text-box:hover {
+            background-color: #f0f0f0;
+        }
+
+       .side-box {
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            width: calc(90% * 2 / 3);
+            pointer-events: none;
+        }
+
+        text {
+            font-family: sans-serif;
+            font-size: 16px;
+            visibility: hidden;
+        }
+
+       .node {
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+
+       .link {
+            stroke: #A08060;
+            stroke-width: 3px;
+        }
+
+        /* 确保 svg 图表居中 */
+        #section2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #graph {
+            display: block;
+            margin: 0 auto;
+        }
+        iframe {
+            background-color: yellow;
+        }
+
+        /* 媒体查询，针对小屏幕设备 */
+        @media (max-width: 768px) {
+           .new-box {
+                max-width: 95%;
+            }
+
+           .jump-box {
+                width: calc(95% * 2 / 3);
+                margin-bottom: calc((0.75rem * 2) * 1.5);
+            }
+
+           .text-box {
+                width: calc(95% * 2 / 3);
+            }
+
+           .side-box {
+                width: calc(95% * 2 / 3);
+            }
+        }
+
+        /* 定义动态边框动画 */
+        @keyframes borderAnimation {
+            0% {
+                border-color: #D2B48C transparent transparent transparent;
+            }
+            25% {
+                border-color: transparent #D2B48C transparent transparent;
+            }
+            50% {
+                border-color: transparent transparent #D2B48C transparent;
+            }
+            75% {
+                border-color: transparent transparent transparent #D2B48C;
+            }
+            100% {
+                border-color: #D2B48C transparent transparent transparent;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="ccc2.html" class="text-xl font-bold text-gray-800 nav-title-box">药香中国</a>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">首页</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">关于</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 标题和介绍 -->
+        <section class="text-center py-16">
+            <div class="title-container">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4 title">本草经年</h1>
+            </div>
+            <p class="text-lg text-gray-600 mb-8">中医药书籍承载着千年智慧，见证着中医药文化的传承与发展。本部分将带您穿越时空，探索中药书籍的发展脉络，重现历史长河中的医学瑰宝。</p>
+            <a href="#" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300">了解更多</a>
+        </section>
+
+        <!-- 新盒子 -->
+        <section class="new-box my-8 flex flex-col items-center justify-center" id="new-box">
+            <!-- 文本框展示区 -->
+            <div class="jump-box-container">
+                <div class="jump-box bg-transparent shadow-md text-center hover:bg-gray-100 transition duration-300" data-target="section1">
+                    <i class="book-icon fa-solid fa-book"></i>
+                    <h2 class="text-xl font-bold text-gray-800">各朝代本草著作分布图</h2>
+                    <div class="triangle"></div>
+                </div>
+                <div class="jump-box bg-transparent shadow-md text-center hover:bg-gray-100 transition duration-300" data-target="section2">
+                    <i class="book-icon fa-solid fa-book"></i>
+                    <h2 class="text-xl font-bold text-gray-800">中国古代医学著作传承脉络图</h2>
+                    <div class="triangle"></div>
+                </div>
+                <div class="jump-box bg-transparent shadow-md text-center hover:bg-gray-100 transition duration-300" data-target="section3">
+                    <i class="book-icon fa-solid fa-book"></i>
+                    <h2 class="text-xl font-bold text-gray-800">影响中医历史的二十五位杰出人物</h2>
+                    <div class="triangle"></div>
+                </div>
+            </div>
+
+            <!-- 大盒子包裹三个部分内容 -->
+            <div class="content-container">
+                <div id="section1" class="w-full my-4">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4"></h2>
+                    <div class="text-box">
+                        <i class="book-icon fa-solid fa-book"></i>
+                        <p class="text-lg text-gray-600">各朝代本草著作分布图</p>
+                    </div>
+                    <div class="side-box">
+                        <p class="text-lg text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在探索中医药历史时，我们可以通过各朝代的医书数量了解其发展。数据显示，清代以72部医书数量居首，体现了中医药学的繁荣和系统化。这一时期编撰和完善了许多经典著作，对后世影响深远。</p>
+                    </div>
+                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                    <div class="side-box">
+                        <p class="text-lg text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这些数据不仅展示了各朝代医书数量，还反映了中医药学的历史发展。从汉代的基础，到唐代的系统化，再到宋代的实践总结，直至清代的繁荣，中医药学经过数千年的积累，形成了今天博大精深的文化。</p>
+                    </div>
+                </div>
+                <div id="section2" class="w-full my-4">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4"></h2>
+                    <div class="text-box">
+                        <i class="book-icon fa-solid fa-book"></i>
+                        <p class="text-lg text-gray-600">中国古代医学著作传承脉络图</p>
+                    </div>
+                    <div class="side-box">
+                        <p class="text-lg text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;探索中国古代医学的丰富遗产，这张图详细地展示了不同医学类别下的重要著作及其作者。图中以医书种类为中心，向外延伸至各个领域的代表作和作者，形成了一幅清晰的中国古代医学著作分类图谱。</p>
+                    </div>
+                    <svg id="graph" width="1000" height="400"></svg>
+                    <script src="script.js"></script>
+                    <!-- 确保在 DOM 加载完成后引入 script.js -->
+                    <!-- <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const script = document.createElement('script');
+                            script.src = 'script.js';
+                            document.body.appendChild(script);
+                        });
+                    </script> -->
+                    
+                </div>
+                <div id="section3" class="w-full my-4">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4"></h2>
+                    <p class="text-lg text-gray-600 mb-4"></p>
+                    <div class="text-box">
+                        <i class="book-icon fa-solid fa-book"></i>
+                        <p class="text-lg text-gray-600">影响中医历史的二十五位杰出人物</p>
+                    </div>
+                    <iframe src="代表人物.html" width="1000" height="600" scrolling="no"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <p class="text-gray-600">版权所有 &copy; 2025 仿造页面</p>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const jumpBoxes = document.querySelectorAll('.jump-box');
+        jumpBoxes.forEach(jumpBox => {
+            jumpBox.addEventListener('click', function () {
+                const targetId = this.dataset.target;
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }, 3);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>    
