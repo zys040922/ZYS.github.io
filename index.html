@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>药香中国 - Fragrance of Chinese Medicine</title>
+
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #f4a261;
+            --accent-color: #e76f51;
+            --text-color: #264653;
+            --light-text: #f8f9fa;
+            --background-color: #f1faee;
+            --transition-speed: 0.3s;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', 'ZCOOL XiaoWei', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            background: url('images1/img3/背景2.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a5a80;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px var(--shadow-color);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            transform: translateY(0);
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 25px var(--shadow-color);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: padding 0.3s ease;
+        }
+        
+        .navbar.scrolled .header-content {
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo:hover {
+            color: var(--accent-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* 英雄区域 */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images1/img3/花圈1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            transition: background-size 0.5s ease;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+            background: linear-gradient(45deg, #ffffff, #f4a261);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+            line-height: 1.8;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.9s forwards;
+            opacity: 0;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* 滚动图片容器 */
+        .scrolling-image-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scrolling-image {
+            width: 200%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .scrolling-image img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 内容区域 */
+        main {
+            padding-top: 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            padding: 120px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        
+        .section-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 70px;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        
+        /* 特色卡片 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+        
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-20px) rotateY(5deg);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain; /* 确保图片完整显示 */
+            transition: transform 0.5s ease;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            animation: float 5s ease-in-out infinite; /* 添加浮动动画 */
+        }
+        
+        .feature-card:hover .feature-img {
+            transform: scale(1.08);
+        }
+        
+        .feature-content {
+            padding: 0 0 20px 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+        
+        .feature-card:hover .feature-title {
+            color: var(--accent-color);
+        }
+        
+        .feature-text {
+            color: var(--text-color);
+            margin-bottom: 25px;
+            flex-grow: 1;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .feature-link {
+            display: inline-block;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .feature-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        .feature-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .feature-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 3D效果 */
+        .three-d-container {
+            height: 500px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .feature-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>药香中国
+                </div>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#services">服务项目</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 英雄区域 -->
+    <section class="hero-section" id="home">
+        <div class="hero-decoration"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">药香中国</h1>
+            <p class="hero-subtitle">Fragrance of Chinese Medicine</p>
+            <p class="hero-description">传承千年智慧，创新现代应用，让中医药文化焕发新生</p>
+            <a href="#about" class="hero-btn">了解更多</a>
+        </div>
+    </section>
+    
+    <!-- 滚动图片容器 -->
+    <div class="scrolling-image-container">
+        <div class="scrolling-image">
+            <img src="images1/img3/横.png" alt="Scrolling Image">
+            <img src="images1/img3/横.png" alt="Scrolling Image">
+        </div>
+    </div>
+    
+    <!-- 关于我们 -->
+    <section class="content-section" id="about">
+        <h2 class="section-title">关于我们</h2>
+        <p class="section-text">我们是致力于传承和发扬中医药文化的团队，通过创新的方式让传统智慧焕发新生。</p>
+    </section>
+    
+    <!-- 服务项目 -->
+    <section class="content-section" id="services">
+        <h2 class="section-title">我们的服务</h2>
+        <p class="section-text">我们提供全方位的中医药相关服务，包括健康咨询、产品开发和文化传播。</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <img src="images1/img3/illustration1.png" alt="健康咨询" class="feature-img">
+                <div class="feature-content">
+                    <h3 class="feature-title">健康咨询</h3>
+                    <p class="feature-text">提供专业的中医药健康咨询服务，帮助您了解中医药知识，制定个性化健康方案。</p>
+                    <a href="#" class="feature-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <img src="images1/img3/illustration1.png" alt="文化传播" class="feature-img">
+                <div class="feature-content">
+                    <h3 class="feature-title">文化传播</h3>
+                    <p class="feature-text">通过多种渠道传播中医药文化，让更多人了解中医药的价值和魅力。</p>
+                    <a href="#" class="feature-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系我们 -->
+    <section class="content-section" id="contact">
+        <h2 class="section-title" ><a href="aaa.html">联系我们</a></h2>
+        <p class="section-text">我们提供全方位的中医药相关服务，包括健康咨询、产品开发和文化传播。无论是个人健康管理还是企业中医药产品开发，我们都能提供专业的解决方案。</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-content">
+                    <h3 class="feature-title"><a href="aaa.html">联系我们</a></h3>
+                    <p class="feature-text">
+                        <i class="fas fa-map-marker-alt"></i> 北京市海淀区中关村南大街5号<br>
+                        <i class="fas fa-phone"></i> +86 10 8888 8888<br>
+                        <i class="fas fa-envelope"></i> info@yaohuaxing.com
+                    </p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-content">
+                    <h3 class="feature-title"><a href="医书.html">联系我们</a></h3>
+                    <p class="feature-text">
+                        周一至周五: 9:00 - 18:00<br>
+                        周六: 10:00 - 16:00<br>
+                        周日: 休息
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 class="footer-title">药香中国</h3>
+                <p>传承千年智慧，创新现代应用，让中医药文化焕发新生</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-title">快速链接</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#services">服务项目</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3 class="footer-title">服务</h3>
+                <ul class="footer-links">
+                    <li><a href="#">健康咨询</a></li>
+                    <li><a href="#">产品开发</a></li>
+                    <li><a href="#">文化传播</a></li>
+                    <li><a href="#">培训课程</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <p class="copyright">© 2023 药香中国. 保留所有权利.</p>
+    </footer>
+    
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // 英雄区域图片缓慢放大效果
+            const heroSection = document.querySelector('.hero-section');
+            const scrollPosition = window.scrollY;
+            const maxScale = 1.5; // 最大缩放比例
+            const scaleValue = 1 + (scrollPosition / 1000) * (maxScale - 1); // 根据滚动位置计算缩放比例
+            heroSection.style.backgroundSize = `${scaleValue * 100}% ${scaleValue * 100}%`; // 设置背景图片缩放
+        });
+        
+        // 滚动图片效果
+        const scrollingImage = document.querySelector('.scrolling-image');
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const scrollPercentage = scrollPosition / (document.body.scrollHeight - window.innerHeight);
+            const translateX = (scrollPercentage * 100) % 100;
+            scrollingImage.style.transform = `translateX(${-translateX}%)`;
+        });
+        
+        // 3D效果
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, 500);
+        document.getElementById('three-d-render').appendChild(renderer.domElement);
+        
+        const geometry = new THREE.TorusKnotGeometry(1, 0.4, 64, 16);
+        const material = new THREE.MeshPhongMaterial({ 
+            color: 0xf4a261,
+            transparent: true,
+            opacity: 0.8,
+            shininess: 100,
+            specular: 0xffffff
+        });
+        
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        
+        camera.position.z = 5;
+        
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(5, 3, 5);
+        scene.add(light);
+        
+        const light2 = new THREE.DirectionalLight(0xffffff, 0.5);
+        light2.position.set(-5, -3, -5);
+        scene.add(light2);
+        
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // 响应式调整
+        window.addEventListener('resize', function() {
+            camera.aspect = window.innerWidth / 500;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, 500);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
