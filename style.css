@@ -101,7 +101,7 @@ p{
 }
 
 .app-container {
-    max-width: 1100px;
+    max-width: 80%;
     margin: 100px auto;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -117,7 +117,7 @@ p{
 
 header {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 80px;
     height: 150px;
     font-size: 30px;
 }
@@ -359,3 +359,86 @@ a{
     text-decoration: none;
 }
 
+
+.navbar {
+    width: 100%;
+    background-color:transparent;
+    /* backdrop-filter: blur(15px); */
+    box-shadow: 0 2px 20px var(--shadow-color);
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+    transform: translateY(0);
+}
+
+
+.nav-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-header-content{
+    display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: padding 0.3s ease;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.logo:hover {
+    color: var(--accent-color);
+}
+
+.logo i {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 40px;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    padding: 5px 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
