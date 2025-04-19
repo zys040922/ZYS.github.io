@@ -1,17 +1,17 @@
 // 定义节点数据
 const nodes = [
    // 医书种类
-   { id: '本草', type: '医书种类', name: '本草:专注于药物学，包括各种草药、矿物药、动物药等的采集、鉴定、性能、功效和用法' },
-   { id: '方药', type: '医书种类', name: '方药：涉及方剂学，即中药配方的组成、配伍原则、功效和临床应用' },
-   { id: '四诊', type: '医书种类', name: '四诊:基于中医的望、闻、问、切四种诊断方法，是中医诊断学的基础' },
-   { id: '医经', type: '医书种类', name: '医经:包含中医的基本理论和原则，是中医理论体系的核心' },
-   { id: '医论', type: '医书种类', name: '医论:涉及对中医理论和实践的讨论、分析和评价' },
-   { id: '医案', type: '医书种类', name: '医案:记录了临床治疗的案例，包括病情、诊断、治疗过程和效果' },
-   { id: '经络', type: '医书种类', name: '经络:研究人体经络系统的结构、功能和病理变化' },
-   { id: '针灸', type: '医书种类', name: '针灸:专注于针灸学，包括针灸的理论、技术和临床应用' },
-   { id: '妇幼', type: '医书种类', name: '妇幼:涉及妇女和儿童的健康问题，包括妇科、儿科疾病的预防和治疗' },
-   { id: '五官', type: '医书种类', name: '五官:研究眼、耳、鼻、喉等五官科疾病的诊断和治疗' },
-   { id: '伤科', type: '医书种类', name: '伤科:涉及外伤、骨折、脱位等损伤性疾病的治疗' },
+   { id: '本草', type: '医书种类', name: '本草' },
+   { id: '方药', type: '医书种类', name: '方药' },
+   { id: '四诊', type: '医书种类', name: '四诊' },
+   { id: '医经', type: '医书种类', name: '医经' },
+   { id: '医论', type: '医书种类', name: '医论' },
+   { id: '医案', type: '医书种类', name: '医案' },
+   { id: '经络', type: '医书种类', name: '经络' },
+   { id: '针灸', type: '医书种类', name: '针灸' },
+   { id: '妇幼', type: '医书种类', name: '妇幼' },
+   { id: '五官', type: '医书种类', name: '五官' },
+   { id: '伤科', type: '医书种类', name: '伤科' },
    // 作者
    { id: '神农', type: '作者', name: '神农' },
    { id: '李时珍', type: '作者', name: '李时珍' },
@@ -134,16 +134,12 @@ const node = svg.append("g")
           .transition()
           .duration(300)
           .attr("r", 12);
-       const textId = `text-${d.id}`;
-       d3.select(`#${textId}`).style("visibility", "visible");
    })
   .on("mouseout", function (event, d) {
        d3.select(this)
           .transition()
           .duration(300)
           .attr("r", 8);
-       const textId = `text-${d.id}`;
-       d3.select(`#${textId}`).style("visibility", "hidden");
    });
 
 // 节点添加文本标签
@@ -157,7 +153,8 @@ const labels = svg.append("g")
   .attr("x", d => d.x)
   .attr("y", d => d.y - 15)
   .attr("text-anchor", "middle")
-  .attr("dominant-baseline", "middle");
+  .attr("dominant-baseline", "middle")
+  .style("visibility", "visible"); // 确保文本始终可见
 
 // 更新节点和连线的位置
 simulation.on("tick", () => {
@@ -194,13 +191,12 @@ simulation.on("end", () => {
 });
 
 // 添加节点上下浮动效果
-function addFloatingEffect() {
-   node.transition()
-      .duration(1000)
-      .ease(d3.easeSinInOut)
-      .attr("cy", d => d.y + Math.random() * 10 - 5)
-      .on("end", addFloatingEffect);
-}
+// function addFloatingEffect() {
+//    node.transition()
+//       .duration(1000)
+//       .ease(d3.easeSinInOut)
+//       .attr("cy", d => d.y + Math.random() * 10 - 5)
+//       .on("end", addFloatingEffect);
+// }
 
 addFloatingEffect();
-   
