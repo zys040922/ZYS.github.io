@@ -652,7 +652,17 @@ document.addEventListener("DOMContentLoaded", function () {
     { "name": "澳门", "value": 0 }
 ]
         },
-        ]
+        ],
+    graphic: [{
+          type: 'text',
+          left: 'right',
+          top: 'bottom',
+          style: {
+            text: '审图号：GS（2024）0650号', // 替换为实际审图号
+            font: '12px Arial',
+            fill: '#333'
+          }
+        }]
 };
                     
   myChart.setOption(option);
