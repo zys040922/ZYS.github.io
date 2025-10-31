@@ -83,7 +83,7 @@
       </button>
     </div>
     
-    <header class="mb-8 text-center">
+    <header class="mb-6 text-center">
       <h1 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-2">学习计划打卡表</h1>
       <p class="text-gray-600" id="current-date-display"></p>
       <div id="today-task-indicator" class="mt-2 px-4 py-2 rounded-md inline-block hidden"></div>
@@ -107,8 +107,8 @@
       </div>
     </header>
 
-    <!-- 关键修改：添加固定高度的容器确保滚动时表头固定 -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow-md" style="max-height: calc(100vh - 280px);">
+    <!-- 关键修改：将overflow-x-auto改为overflow-auto，调整高度限制 -->
+    <div class="overflow-auto bg-white rounded-lg shadow-md" style="max-height: calc(100vh - 200px);">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50 sticky-header">
           <tr>
@@ -143,7 +143,7 @@
       </table>
     </div>
 
-    <div class="mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="mt-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-600">
         <span id="completed-count">已完成: 0</span> / <span id="total-count">总任务: 0</span>
       </div>
