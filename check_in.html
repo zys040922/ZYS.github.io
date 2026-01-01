@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学习计划打卡</title>
+  <title>学习计划打卡（2026.1.1-3.1）</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
@@ -14,7 +13,7 @@
           colors: {
             math: '#3B82F6',       // 数学 - 蓝色
             english: '#10B981',    // 英语 - 绿色
-            politics: '#F59E0B',   // 政治 - 橙色
+            politics: '#F59E0B',   // 政治/时政 - 橙色
             computer: '#8B5CF6'    // 计算机 - 紫色
           },
           fontFamily: {
@@ -44,15 +43,13 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
-      /* 固定表头样式 - 关键修改 */
       .sticky-header {
         position: sticky;
         top: 0;
-        z-index: 100; /* 提高z-index确保不被内容覆盖 */
+        z-index: 100;
         background-color: #F9FAFB;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* 添加轻微阴影区分表头和内容 */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       }
-      /* 固定第一列样式 */
       .sticky-first-col {
         position: sticky;
         left: 0;
@@ -73,10 +70,8 @@
     }
   </style>
 </head>
-
 <body class="bg-gray-50 font-sans">
   <div class="container mx-auto px-4 py-8 max-w-7xl">
-    <!-- 今日任务按钮 -->
     <div class="mb-4 flex justify-center">
       <button id="today-btn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition flex items-center gap-2 shadow-md">
         <i class="fa fa-calendar-o"></i> 查看今日任务
@@ -84,57 +79,40 @@
     </div>
     
     <header class="mb-8 text-center">
-      <h1 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-2">学习计划打卡表</h1>
+      <h1 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-2">学习计划打卡表（2026.1.1-3.1）</h1>
       <p class="text-gray-600" id="current-date-display"></p>
       <div id="today-task-indicator" class="mt-2 px-4 py-2 rounded-md inline-block hidden"></div>
       <div class="flex flex-wrap justify-center gap-4 mt-4">
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-math rounded-full"></div>
-          <span class="text-sm text-gray-600">数学类任务</span>
+          <span class="text-sm text-gray-600">数学任务</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-english rounded-full"></div>
-          <span class="text-sm text-gray-600">英语类任务</span>
+          <span class="text-sm text-gray-600">英语任务</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-politics rounded-full"></div>
-          <span class="text-sm text-gray-600">政治类任务</span>
+          <span class="text-sm text-gray-600">政治/时政任务</span>
         </div>
         <div class="flex items-center gap-2">
           <div class="w-4 h-4 bg-computer rounded-full"></div>
-          <span class="text-sm text-gray-600">计算机类任务</span>
+          <span class="text-sm text-gray-600">计算机任务</span>
         </div>
       </div>
     </header>
 
-    <!-- 关键修改：添加固定高度的容器确保滚动时表头固定 -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow-md" style="max-height: calc(80vh - 80px);">
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md" style="max-height: calc(70vh - 10px);">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50 sticky-header">
           <tr>
-            <!-- 第一列（日期）固定 -->
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky-first-col">日期</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
-            
-            <!-- 数学类任务 -->
-            <th class="px-6 py-3 text-left text-xs font-medium bg-math/10 text-math uppercase tracking-wider subject-header">数学练习</th>
-            
-            <!-- 英语类任务 -->
-            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider subject-header">英语练习</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider subject-header">英语精读</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider subject-header">单词150个</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider">单词类型</th>
-            
-            <!-- 政治类任务 -->
-            <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider">政治类型</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider subject-header">政治课</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider subject-header">政治梳理</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider subject-header">政治背诵与练习</th>
+            <th class="px-6 py-3 text-left text-xs font-medium bg-math/10 text-math uppercase tracking-wider subject-header">数学</th>
+            <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider subject-header">政治</th>
+            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider subject-header">英语单词</th>
+            <th class="px-6 py-3 text-left text-xs font-medium bg-english/10 text-english uppercase tracking-wider subject-header">英语</th>
+            <th class="px-6 py-3 text-left text-xs font-medium bg-computer/10 text-computer uppercase tracking-wider subject-header">计算机</th>
             <th class="px-6 py-3 text-left text-xs font-medium bg-politics/10 text-politics uppercase tracking-wider subject-header">时政</th>
-            
-            <!-- 计算机类任务 -->
-            <th class="px-6 py-3 text-left text-xs font-medium bg-computer/10 text-computer uppercase tracking-wider subject-header">计算机练习</th>
-            <th class="px-6 py-3 text-left text-xs font-medium bg-computer/10 text-computer uppercase tracking-wider">计算机类型</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200" id="task-body">
@@ -151,75 +129,97 @@
   </div>
 
   <script>
-    // 完整学习计划数据 (11月1日 - 12月31日)
-const studyPlan = [
-  {"日期": "2025-11-21", "类型": "库课", "数学练习": "刷题 5", "英语练习": "4篇练习", "英语精读": "第11单元", "单词150个": true, "单词类型": null, "政治课": "第6章", "政治类型": null, "政治梳理背诵": "第6章", "政治练习": "第21章", "时政": "1月国内部分", "计算机练习": "第六、七章", "计算机类型": "库课"},
-  {"日期": "2025-11-22", "类型": null, "数学练习": "刷题 6", "英语练习": "4篇练习", "英语精读": "第11单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第22章", "时政": "1月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-11-23", "类型": null, "数学练习": null, "英语练习": "4篇练习", "英语精读": "第12单元", "单词150个": true, "单词类型": null, "政治课": "第7章", "政治类型": null, "政治梳理背诵": "第7章", "政治练习": "第23章", "时政": "2月国内部分", "计算机练习": "第8章", "计算机类型": null},
-  {"日期": "2025-11-24", "类型": null, "数学练习": null, "英语练习": "5篇练习", "英语精读": "第12单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第24章", "时政": "2月国际部分", "计算机练习": "第9章", "计算机类型": null},
-  {"日期": "2025-11-25", "类型": null, "数学练习": "刷题 7", "英语练习": "5篇练习", "英语精读": "第13单元", "单词150个": true, "单词类型": null, "政治课": "第8章", "政治类型": null, "政治梳理背诵": "第8章", "政治练习": "第25章", "时政": "3月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-11-26", "类型": null, "数学练习": "刷题 8", "英语练习": "语法第1部分+作文1", "英语精读": "第13单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第26章", "时政": "3月国际部分", "计算机练习": "第10章", "计算机类型": null},
-  {"日期": "2025-11-27", "类型": null, "数学练习": null, "英语练习": "语法第2部分+作文2", "英语精读": "第14单元", "单词150个": true, "单词类型": null, "政治课": "导论", "政治类型": "习概", "政治梳理背诵": "第9章", "政治练习": "第27章", "时政": "4月国内部分", "计算机练习": "整理一", "计算机类型": "错题整理"},
-  {"日期": "2025-11-28", "类型": null, "数学练习": "刷题 9", "英语练习": "语法第3部分+作文3", "英语精读": "第14单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第28章", "时政": "4月国际部分", "计算机练习": "整理二", "计算机类型": null},
-  {"日期": "2025-11-29", "类型": null, "数学练习": "刷题 10、11", "英语练习": "语法第4部分+作文4", "英语精读": "第15单元", "单词150个": true, "单词类型": null, "政治课": "第1章", "政治类型": null, "政治梳理背诵": "第10章", "政治练习": "第29章", "时政": "5月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-11-30", "类型": null, "数学练习": null, "英语练习": "语法第5部分+作文5", "英语精读": "第15单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第30章", "时政": "5月国际部分", "计算机练习": "整理三", "计算机类型": null},
-  {"日期": "2025-12-01", "类型": null, "数学练习": null, "英语练习": "语法第6部分+作文6", "英语精读": "第16单元", "单词150个": true, "单词类型": "第二轮", "政治课": "第2章", "政治类型": null, "政治梳理背诵": "第11章", "政治练习": "第31章", "时政": "6月国内部分", "计算机练习": "整理四", "计算机类型": null},
-  {"日期": "2025-12-02", "类型": null, "数学练习": "刷题 12", "英语练习": "语法第7部分+作文7", "英语精读": "第16单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第32章", "时政": "6月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-03", "类型": "基础卷", "数学练习": "基础卷一", "英语练习": "语法第8部分+作文8", "英语精读": "第17单元", "单词150个": true, "单词类型": null, "政治课": "第3章", "政治类型": null, "政治梳理背诵": "第12章", "政治练习": "第33章", "时政": "7月国内部分", "计算机练习": "整理五", "计算机类型": null},
-  {"日期": "2025-12-04", "类型": null, "数学练习": null, "英语练习": "语法第9部分+作文9", "英语精读": "第17单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第34章", "时政": "7月国际部分", "计算机练习": "基础卷一", "计算机类型": "基础卷"},
-  {"日期": "2025-12-05", "类型": null, "数学练习": "基础卷二", "英语练习": "语法第10部分+作文10", "英语精读": "第18单元", "单词150个": true, "单词类型": null, "政治课": "第4章", "政治类型": null, "政治梳理背诵": "第13章", "政治练习": "第35章", "时政": "8月国内部分", "计算机练习": "基础卷二", "计算机类型": null},
-  {"日期": "2025-12-06", "类型": null, "数学练习": "基础卷三", "英语练习": "语法第11部分+作文11", "英语精读": "第18单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第36章", "时政": "8月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-07", "类型": null, "数学练习": null, "英语练习": "语法第12部分+作文12", "英语精读": "第19单元", "单词150个": true, "单词类型": null, "政治课": "第5章", "政治类型": null, "政治梳理背诵": "第14章", "政治练习": "第37章", "时政": "9月国内部分", "计算机练习": "基础卷三", "计算机类型": null},
-  {"日期": "2025-12-08", "类型": null, "数学练习": null, "英语练习": "语法第13部分+作文13", "英语精读": "第19单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第38章", "时政": "9月国际部分", "计算机练习": "基础卷四", "计算机类型": null},
-  {"日期": "2025-12-09", "类型": null, "数学练习": "基础卷四", "英语练习": "语法第14部分+作文14", "英语精读": "第20单元", "单词150个": true, "单词类型": null, "政治课": "第6章", "政治类型": null, "政治梳理背诵": "第15章", "政治练习": "第39章", "时政": "10月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-10", "类型": null, "数学练习": "基础卷五", "英语练习": "语法第15部分+作文15", "英语精读": "第20单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第40章", "时政": "10月国际部分", "计算机练习": "基础卷五", "计算机类型": null},
-  {"日期": "2025-12-11", "类型": null, "数学练习": null, "英语练习": "语法第16部分+作文16", "英语精读": "第21单元", "单词150个": true, "单词类型": null, "政治课": "第7章", "政治类型": null, "政治梳理背诵": "第16章", "政治练习": "第41章", "时政": "1月国内部分", "计算机练习": "强化卷1", "计算机类型": "强化篇"},
-  {"日期": "2025-12-12", "类型": "杰哥练习题", "数学练习": "第一章", "英语练习": "语法第17部分+作文17", "英语精读": "第21单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第42章", "时政": "1月国际部分", "计算机练习": "强化卷2", "计算机类型": null},
-  {"日期": "2025-12-13", "类型": null, "数学练习": "第二章", "英语练习": "语法第18部分+作文18", "英语精读": "第22单元", "单词150个": true, "单词类型": null, "政治课": "第8章", "政治类型": null, "政治梳理背诵": "第17章", "政治练习": "第43章", "时政": "2月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-14", "类型": null, "数学练习": null, "英语练习": "语法第19部分+作文19", "英语精读": "第22单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第44章", "时政": "2月国际部分", "计算机练习": "强化卷3、4", "计算机类型": null},
-  {"日期": "2025-12-15", "类型": null, "数学练习": null, "英语练习": "作文20+作文21", "英语精读": "第23单元", "单词150个": true, "单词类型": null, "政治课": "第9章", "政治类型": null, "政治梳理背诵": "第18章", "政治练习": "第45章", "时政": "3月国内部分", "计算机练习": "强化卷5", "计算机类型": null},
-  {"日期": "2025-12-16", "类型": null, "数学练习": "第三章", "英语练习": "作文22+作文23", "英语精读": "第23单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第46章", "时政": "3月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-17", "类型": null, "数学练习": "第四章", "英语练习": "作文24+作文25", "英语精读": "第24单元", "单词150个": true, "单词类型": null, "政治课": "第10章", "政治类型": null, "政治梳理背诵": "第19章", "政治练习": "第47章", "时政": "4月国内部分", "计算机练习": "强化卷6", "计算机类型": null},
-  {"日期": "2025-12-18", "类型": null, "数学练习": null, "英语练习": "基础卷一", "英语精读": "第24单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第48章", "时政": "4月国际部分", "计算机练习": "通关卷一", "计算机类型": "通关篇"},
-  {"日期": "2025-12-19", "类型": null, "数学练习": "第五章", "英语练习": "基础卷二", "英语精读": "第25单元", "单词150个": true, "单词类型": null, "政治课": "第11章", "政治类型": null, "政治梳理背诵": "第20章", "政治练习": "第49章", "时政": "5月国内部分", "计算机练习": "通关卷二", "计算机类型": null},
-  {"日期": "2025-12-20", "类型": null, "数学练习": "第六章", "英语练习": "基础卷三", "英语精读": "第25单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第50章", "时政": "5月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-21", "类型": null, "数学练习": null, "英语练习": "基础卷四", "英语精读": "第26单元", "单词150个": true, "单词类型": null, "政治课": "第12章", "政治类型": null, "政治梳理背诵": "第21章", "政治练习": "第51章", "时政": "6月国内部分", "计算机练习": "通关卷三", "计算机类型": null},
-  {"日期": "2025-12-22", "类型": null, "数学练习": null, "英语练习": "强化卷一", "英语精读": "第26单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第52章", "时政": "6月国际部分", "计算机练习": "通关卷四", "计算机类型": null},
-  {"日期": "2025-12-23", "类型": null, "数学练习": "第七、八章", "英语练习": "强化卷二", "英语精读": "第27单元", "单词150个": true, "单词类型": null, "政治课": "第13章", "政治类型": null, "政治梳理背诵": "第22章", "政治练习": "第53章", "时政": "7月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-24", "类型": null, "数学练习": "第九章", "英语练习": "强化卷三", "英语精读": "第27单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第53章", "时政": "7月国际部分", "计算机练习": "通关卷五", "计算机类型": null},
-  {"日期": "2025-12-25", "类型": null, "数学练习": null, "英语练习": "强化卷四", "英语精读": "第28单元", "单词150个": true, "单词类型": null, "政治课": "第14章", "政治类型": null, "政治梳理背诵": "第22章", "政治练习": "第52章", "时政": "8月国内部分", "计算机练习": "通关卷六", "计算机类型": null},
-  {"日期": "2025-12-26", "类型": null, "数学练习": "第十章", "英语练习": "强化卷五", "英语精读": "第28单元", "单词150个": true, "单词类型": null, "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第51章", "时政": "8月国际部分", "计算机练习": "真题卷一", "计算机类型": "真题篇"},
-  {"日期": "2025-12-27", "类型": "错题整理复习", "数学练习": "错题复习", "英语练习": "通关卷一", "英语精读": "第29单元", "单词150个": true, "单词类型": null, "政治课": "第15章", "政治类型": null, "政治梳理背诵": "第22章", "政治练习": "第51章", "时政": "9月国内部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-28", "类型": null, "数学练习": null, "英语练习": "通关卷二", "英语精读": "第29单元", "单词150个": true, "单词类型": "浏览800个单词", "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第51章", "时政": "9月国际部分", "计算机练习": "真题卷二", "计算机类型": null},
-  {"日期": "2025-12-29", "类型": null, "数学练习": null, "英语练习": "通关卷三", "英语精读": "第30单元", "单词150个": true, "单词类型": "浏览800个单词", "政治课": "第16章", "政治类型": null, "政治梳理背诵": "第22章", "政治练习": "第51章", "时政": "10月国内部分", "计算机练习": "真题卷三", "计算机类型": null},
-  {"日期": "2025-12-30", "类型": null, "数学练习": "错题复习", "英语练习": "通关卷四", "英语精读": "第30单元", "单词150个": true, "单词类型": "浏览800个单词", "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第51章", "时政": "10月国际部分", "计算机练习": null, "计算机类型": null},
-  {"日期": "2025-12-31", "类型": null, "数学练习": "错题复习", "英语练习": "通关卷五", "英语精读": "第31单元", "单词150个": true, "单词类型": "浏览800个单词", "政治课": "第17章", "政治类型": null, "政治梳理背诵": "第52章", "政治练习": "第51章", "时政": "1月国内部分", "计算机练习": "错题总结", "计算机类型": "错题整理总结"},
-  {"日期": "2026-1-1", "类型": null, "数学练习": null, "英语练习": "通关卷六", "英语精读": "第31单元", "单词150个": true, "单词类型": "浏览800个单词", "政治课": null, "政治类型": null, "政治梳理背诵": null, "政治练习": "第51章", "时政": "1月国际部分", "计算机练习": "错题总结", "计算机类型": null}
-];
-    // 任务列定义（用于生成表格）
+    // 生成日期范围（2026-01-01 至 2026-03-01）
+    function generateDateRange(startDateStr, endDateStr) {
+      const dates = [];
+      const startDate = new Date(startDateStr);
+      const endDate = new Date(endDateStr);
+      let currentDate = new Date(startDate);
+      while (currentDate <= endDate) {
+        dates.push(currentDate.toISOString().split('T')[0]);
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      return dates;
+    }
+    const planDates = generateDateRange('2026-01-01', '2026-03-01');
+
+    // 初始化学习计划
+    let studyPlan = planDates.map(date => ({
+      日期: date,
+      数学: null,
+      政治: null,
+      英语单词: null,
+      英语: null,
+      计算机: null,
+      时政: null
+    }));
+
+    // 1. 填充数学任务（1.2开始）
+    const mathChapters = ["第一章", "第二章上", "第二章下", "第三章", "第四章上", "第四章下", "第五章", "第六章", "第七章", "第八章", "第九章上", "第九章下", "第十章上", "第十章下"];
+    // 章节任务：1.2-1.15（共14天）
+    mathChapters.forEach((chapter, idx) => {
+      const dateIdx = 1 + idx; // 索引1对应1.2
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].数学 = chapter;
+    });
+    // 试卷任务：1.16开始，共43套
+    for (let i = 0; i < 43; i++) {
+      const dateIdx = 15 + i; // 索引15对应1.16
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].数学 = `数学试卷${i+1}套`;
+    }
+
+    // 2. 填充政治任务（1.2开始）
+    const politicsChapters = [
+      "习概导论", "习概第一章", "习概第二章", "习概第三章", "习概第四章", "习概第五章", "习概第六章", "习概第七章", "习概第八章", "习概第九章", "习概第十章", "习概第十一章", "习概第十二章", "习概第十三章", "习概第十四章", "习概第十五章", "习概第十六章", "习概第十七章",
+      "毛概导论", "毛概第一章", "毛概第二章", "毛概第三章", "毛概第四章", "毛概第五章", "毛概第六章", "毛概第七章", "毛概第八章"
+    ];
+    // 章节任务：1.2-1.28（共27天，完成所有章节）
+    politicsChapters.forEach((chapter, idx) => {
+      const dateIdx = 1 + idx; // 索引1对应1.2，索引27对应1.28
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].政治 = chapter;
+    });
+    // 试卷任务：1.29开始，共27套
+    for (let i = 0; i < 27; i++) {
+      const dateIdx = 28 + i; // 索引28对应1.29
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].政治 = `政治试卷${i+1}套`;
+    }
+
+    // 3. 填充英语任务（1.2开始，共41套）
+    for (let i = 0; i < 41; i++) {
+      const dateIdx = 1 + i; // 索引1对应1.2
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].英语 = `英语试卷${i+1}套`;
+    }
+
+    // 4. 填充英语单词（每天80个）
+    studyPlan.forEach(item => item.英语单词 = "单词80个");
+
+    // 5. 填充计算机任务（1.8开始，共35套）
+    for (let i = 0; i < 35; i++) {
+      const dateIdx = 7 + i; // 索引7对应1.8
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].计算机 = `计算机试卷${i+1}套`;
+    }
+
+    // 6. 填充时政：1月国内→1月国际→2月国内→2月国际...12月国内→12月国际循环
+    const timeTopics = [];
+    // 生成1-12月的国内+国际基础列表
+    for (let month = 1; month <= 12; month++) {
+      timeTopics.push(`${month}月国内`);
+      timeTopics.push(`${month}月国际`);
+    }
+    // 按计划日期循环分配时政内容
+    studyPlan.forEach((item, idx) => {
+      const topicIdx = idx % timeTopics.length; // 取模实现循环
+      item.时政 = timeTopics[topicIdx];
+    });
+
+    // 任务列定义
     const taskColumns = [
       { key: '日期', isTask: false, subject: null },
-      { key: '类型', isTask: false, subject: null },
-      
-      // 数学类
-      { key: '数学练习', isTask: true, endDate: '2026-1-1', subject: 'math' },
-      
-      // 英语类 - 只保留复选框，不显示内容
-      { key: '英语练习', isTask: true, endDate: '2026-1-1', subject: 'english' },
-      { key: '英语精读', isTask: true, endDate: '2026-1-1', subject: 'english', showText: false },
-      { key: '单词150个', isTask: true, endDate: '2026-1-1', subject: 'english' },
-      { key: '单词类型', isTask: false, subject: 'english' },
-      
-      // 政治类 - 调整了政治类型的位置
-      { key: '政治类型', isTask: false, subject: 'politics' },
-      { key: '政治课', isTask: false, subject: 'politics' }, // 显示章节，不是复选框
-      { key: '政治梳理背诵', isTask: true, endDate: '2026-1-1', subject: 'politics', showText: false },
-      { key: '政治练习', isTask: true, endDate: '2026-1-1', subject: 'politics', showText: false },
-      { key: '时政', isTask: true, endDate: '2026-1-1', subject: 'politics' },
-      
-      // 计算机类任务
-      { key: '计算机练习', isTask: true, endDate: '2026-1-1', subject: 'computer' },
-      { key: '计算机类型', isTask: false, subject: 'computer' }
+      { key: '数学', isTask: true, endDate: '2026-03-01', subject: 'math' },
+      { key: '政治', isTask: true, endDate: '2026-03-01', subject: 'politics' },
+      { key: '英语单词', isTask: true, endDate: '2026-03-01', subject: 'english' },
+      { key: '英语', isTask: true, endDate: '2026-03-01', subject: 'english' },
+      { key: '计算机', isTask: true, endDate: '2026-03-01', subject: 'computer' },
+      { key: '时政', isTask: true, endDate: '2026-03-01', subject: 'politics' }
     ];
 
     // DOM元素
@@ -244,7 +244,6 @@ const studyPlan = [
 
     // 初始化页面
     function init() {
-      // 显示当前日期
       const now = new Date();
       currentDateDisplay.textContent = `今天是: ${now.toLocaleDateString('zh-CN', {
         year: 'numeric',
@@ -253,19 +252,10 @@ const studyPlan = [
         weekday: 'long'
       })}`;
 
-      // 生成任务表格
       renderTaskTable();
-      
-      // 显示今日任务状态
       showTodayTaskStatus();
-      
-      // 加载本地存储的打卡记录
       loadCheckStatus();
-      
-      // 更新任务统计
       updateTaskStats();
-
-      // 绑定今日任务按钮事件
       todayBtn.addEventListener('click', scrollToToday);
     }
 
@@ -273,37 +263,29 @@ const studyPlan = [
     function showTodayTaskStatus() {
       const todayTask = getTodayTasks();
       const today = getCurrentDate();
-      
-      // 检查当前日期是否在计划范围内
       const dateInPlan = studyPlan.some(plan => plan.日期 === today);
       
       if (dateInPlan) {
-        todayTaskIndicator.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+        todayTaskIndicator.classList.remove('hidden');
+        const todayCheckboxes = document.querySelectorAll(`input[data-date="${today}"]`);
+        const totalTodayTasks = todayCheckboxes.length;
+        const completedTodayTasks = Array.from(todayCheckboxes).filter(cb => cb.checked).length;
         
-        if (todayTask) {
-          // 计算今日任务完成情况
-          const todayCheckboxes = document.querySelectorAll(`input[data-date="${today}"]`);
-          const totalTodayTasks = todayCheckboxes.length;
-          const completedTodayTasks = Array.from(todayCheckboxes).filter(cb => cb.checked).length;
-          
-          if (totalTodayTasks > 0) {
-            const completionRate = Math.round((completedTodayTasks / totalTodayTasks) * 100);
-            
-            if (completionRate === 100) {
-              todayTaskIndicator.classList.add('bg-green-100', 'text-green-800');
-              todayTaskIndicator.textContent = `今日任务已全部完成！`;
-            } else {
-              todayTaskIndicator.classList.add('bg-blue-100', 'text-blue-800');
-              todayTaskIndicator.textContent = `今日任务完成度: ${completedTodayTasks}/${totalTodayTasks} (${completionRate}%)`;
-            }
+        if (totalTodayTasks > 0) {
+          const completionRate = Math.round((completedTodayTasks / totalTodayTasks) * 100);
+          if (completionRate === 100) {
+            todayTaskIndicator.className = 'mt-2 px-4 py-2 rounded-md inline-block bg-green-100 text-green-800';
+            todayTaskIndicator.textContent = `今日任务已全部完成！`;
           } else {
-            todayTaskIndicator.classList.add('bg-gray-100', 'text-gray-800');
-            todayTaskIndicator.textContent = `今日无任务`;
+            todayTaskIndicator.className = 'mt-2 px-4 py-2 rounded-md inline-block bg-blue-100 text-blue-800';
+            todayTaskIndicator.textContent = `今日任务完成度: ${completedTodayTasks}/${totalTodayTasks} (${completionRate}%)`;
           }
+        } else {
+          todayTaskIndicator.className = 'mt-2 px-4 py-2 rounded-md inline-block bg-gray-100 text-gray-800';
+          todayTaskIndicator.textContent = `今日无任务`;
         }
       } else {
-        todayTaskIndicator.classList.remove('hidden');
-        todayTaskIndicator.classList.add('bg-red-100', 'text-red-800');
+        todayTaskIndicator.className = 'mt-2 px-4 py-2 rounded-md inline-block bg-red-100 text-red-800';
         todayTaskIndicator.textContent = `当前日期不在计划范围内`;
       }
     }
@@ -319,61 +301,41 @@ const studyPlan = [
         
         taskColumns.forEach((col, index) => {
           const cell = document.createElement('td');
-          // 第一列添加固定样式
           if (index === 0) {
             cell.className = `px-6 py-4 whitespace-nowrap text-sm sticky-first-col-body font-medium`;
           } else {
-            // 设置学科背景色
             cell.className = `px-6 py-4 whitespace-nowrap text-sm ${col.subject? `bg-${col.subject}/5` : ''}`;
           }
           
           if (col.isTask) {
-            // 检查任务是否在有效期内
             const isActive = new Date(plan.日期) <= new Date(col.endDate);
-            
             if (isActive && plan[col.key]!== null) {
-              // 创建复选框容器
               const checkboxContainer = document.createElement('div');
               checkboxContainer.className = 'flex items-center gap-2';
               
-              // 创建复选框
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
               checkbox.className = `h-4 w-4 rounded border-gray-300 focus:ring-${col.subject}`;
               checkbox.dataset.date = plan.日期;
               checkbox.dataset.task = col.key;
               
-              // 添加复选框事件监听
               checkbox.addEventListener('change', function() {
                 const label = this.nextElementSibling;
-                if (this.checked) {
-                  label.classList.add('task-completed');
-                } else {
-                  label.classList.remove('task-completed');
-                }
+                this.checked? label.classList.add('task-completed') : label.classList.remove('task-completed');
                 saveCheckStatus(this.dataset.date, this.dataset.task, this.checked);
                 updateTaskStats();
-                showTodayTaskStatus(); // 更新今日任务状态
+                showTodayTaskStatus();
               });
               
-              // 创建任务标签 - 根据showText决定是否显示文本
               const label = document.createElement('span');
-              label.textContent = col.showText!== false? (plan[col.key] === true? col.key : plan[col.key]) : '';
+              label.textContent = plan[col.key];
               
               checkboxContainer.appendChild(checkbox);
               checkboxContainer.appendChild(label);
               cell.appendChild(checkboxContainer);
             }
           } else {
-            // 非任务列（显示文本）
-            if (plan[col.key]!== null && plan[col.key]!== undefined) {
-              cell.textContent = plan[col.key];
-              
-              // 为截止日期添加特殊样式
-              if (plan[col.key] === '截止') {
-                cell.classList.add('text-red-500', 'font-medium');
-              }
-            }
+            if (plan[col.key]!== null) cell.textContent = plan[col.key];
           }
           
           row.appendChild(cell);
@@ -383,23 +345,19 @@ const studyPlan = [
       });
     }
 
-    // 保存打卡状态到本地存储
+    // 本地存储打卡状态
     function saveCheckStatus(date, task, isChecked) {
-      const key = `check_${date}_${task}`;
-      localStorage.setItem(key, isChecked);
+      localStorage.setItem(`check_${date}_${task}`, isChecked);
     }
 
-    // 从本地存储加载打卡状态
     function loadCheckStatus() {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach(checkbox => {
         const key = `check_${checkbox.dataset.date}_${checkbox.dataset.task}`;
         const isChecked = localStorage.getItem(key) === 'true';
-        
         if (isChecked) {
           checkbox.checked = true;
-          const label = checkbox.nextElementSibling;
-          label.classList.add('task-completed');
+          checkbox.nextElementSibling.classList.add('task-completed');
         }
       });
     }
@@ -409,7 +367,6 @@ const studyPlan = [
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       const total = checkboxes.length;
       const completed = Array.from(checkboxes).filter(cb => cb.checked).length;
-      
       completedCountEl.textContent = `已完成: ${completed}`;
       totalCountEl.textContent = `总任务: ${total}`;
     }
@@ -418,23 +375,15 @@ const studyPlan = [
     function scrollToToday() {
       const today = getCurrentDate();
       const todayRow = document.querySelector(`tr[data-date="${today}"]`);
-      
       if (todayRow) {
-        // 平滑滚动到今日行
         todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // 添加高亮动画
         todayRow.classList.add('current-date-highlight');
-        setTimeout(() => {
-          todayRow.classList.remove('current-date-highlight');
-        }, 1500);
+        setTimeout(() => todayRow.classList.remove('current-date-highlight'), 1500);
       } else {
-        // 如果当前日期不在计划中，显示提示
         alert('当前日期不在学习计划范围内');
       }
     }
 
-    // 页面加载完成后初始化
     document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
