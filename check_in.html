@@ -141,7 +141,7 @@
       }
       return dates;
     }
-    const planDates = generateDateRange('2026-01-01', '2026-03-01');
+    const planDates = generateDateRange('2026-01-01', '2026-03-20');
 
     // 初始化学习计划
     let studyPlan = planDates.map(date => ({
@@ -184,9 +184,16 @@
     }
 
     // 3. 填充英语任务（1.2开始，共41套）
-    for (let i = 0; i < 41; i++) {
+    let count=0;
+    for (let i = 0; i < 60; i+=2) {
+    	count++;
       const dateIdx = 1 + i; // 索引1对应1.2
-      if (studyPlan[dateIdx]) studyPlan[dateIdx].英语 = `英语试卷${i+1}套`;
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].英语 = `英语试卷${count}套`;
+    }
+    for (let i = 60; i < 71; i++) {
+    	count++;
+      const dateIdx = 1 + i; // 索引1对应1.2
+      if (studyPlan[dateIdx]) studyPlan[dateIdx].英语 = `英语试卷${count}套`;
     }
 
     // 4. 填充英语单词（每天80个）
@@ -214,12 +221,12 @@
     // 任务列定义
     const taskColumns = [
       { key: '日期', isTask: false, subject: null },
-      { key: '数学', isTask: true, endDate: '2026-03-01', subject: 'math' },
-      { key: '政治', isTask: true, endDate: '2026-03-01', subject: 'politics' },
-      { key: '英语单词', isTask: true, endDate: '2026-03-01', subject: 'english' },
-      { key: '英语', isTask: true, endDate: '2026-03-01', subject: 'english' },
-      { key: '计算机', isTask: true, endDate: '2026-03-01', subject: 'computer' },
-      { key: '时政', isTask: true, endDate: '2026-03-01', subject: 'politics' }
+      { key: '数学', isTask: true, endDate: '2026-03-20', subject: 'math' },
+      { key: '政治', isTask: true, endDate: '2026-03-20', subject: 'politics' },
+      { key: '英语单词', isTask: true, endDate: '2026-03-20', subject: 'english' },
+      { key: '英语', isTask: true, endDate: '2026-03-20', subject: 'english' },
+      { key: '计算机', isTask: true, endDate: '2026-03-20', subject: 'computer' },
+      { key: '时政', isTask: true, endDate: '2026-03-20', subject: 'politics' }
     ];
 
     // DOM元素
